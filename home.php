@@ -54,12 +54,17 @@ session_start();
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
                     <div class="card mb-4">
+                    <?php 
+                        $records=mysqli_query($conn,"select * from blogposts where post_id=3 limit 1");
+                        $POST = mysqli_fetch_assoc($records);
+                        ?>
                         <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
                         <div class="card-body">
-                            <div class="small text-muted">January 1, 2021</div>
-                            <h2 class="card-title">Featured Post Title</h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                            <a class="btn btn-primary" href="#!">Read more →</a>
+                            <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($POST['created_at']))?> </div>
+                            <h2 class="card-title"><?php echo $POST['title']?></h2>
+                            <p class="card-text text-truncate"><?php echo $POST['content'] ?></p>
+                            <a class="btn btn-primary" href="post.php ? id=<?php echo $POST['post_id']?>">Read More</a>
+                            
                         </div>
                     </div>
                     <!-- Nested row for non-featured blog posts-->
@@ -167,7 +172,7 @@ session_start();
         </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Avid Reader 2021</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
