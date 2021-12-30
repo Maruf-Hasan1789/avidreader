@@ -8,6 +8,39 @@ session_start();
 
 
 
+<?php
+$results_per_page=4;
+$sql="SELECT * FROM blogposts";
+$result= mysqli_query($conn,$sql);
+$number_of_results= mysqli_num_rows($result);
+$number_of_pages=ceil($number_of_results/$results_per_page);
+
+if(!isset($_GET['page']))
+{
+    $page=1;
+}
+else
+{
+    $page = $_GET['page'];
+}
+
+$starting_limit_number=($page-1)*($results_per_page);
+$sql = "SELECT * FROM blogposts ORDER BY post_id DESC LIMIT ".$starting_limit_number.','.$results_per_page;
+$result=mysqli_query($conn,$sql);
+$post_array=array();
+$prev=$page-1;
+$next=$page+1;
+
+while($row= mysqli_fetch_assoc($result))
+{
+    $post_array[] = $row;
+   // echo $row['title']." ".'<br>';
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -69,25 +102,29 @@ session_start();
                     </div>
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
+                        <?php
+                        $records=mysqli_query($conn,"select * from blogposts where post_id=3 limit 1");
+                        $POST = mysqli_fetch_assoc($records);
+                        ?>
                         <div class="col-lg-6">
                             <!-- Blog post-->
                             <div class="card mb-4">
                                 <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                    <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[0]['created_at']))?></div>
+                                    <h2 class="card-title h4"><?php echo $post_array[0]['title']; ?></h2>
+                                    <p class="card-text text-truncate"><?php echo $post_array[0]['content'] ?></p>
+                                    <a class="btn btn-primary" href="post.php ? id=<?php echo $post_array[0]['post_id']?>">Read More</a>
                                 </div>
                             </div>
                             <!-- Blog post-->
                             <div class="card mb-4">
                                 <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                    <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[1]['created_at']))?></div>
+                                    <h2 class="card-title h4"><?php echo $post_array[1]['title']; ?></h2>
+                                    <p class="card-text text-truncate"><?php echo $post_array[1]['content'] ?></p>
+                                    <a class="btn btn-primary" href="post.php ? id=<?php echo $post_array[1]['post_id']?>">Read More</a>
                                 </div>
                             </div>
                         </div>
@@ -96,37 +133,45 @@ session_start();
                             <div class="card mb-4">
                                 <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                    <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[2]['created_at']))?></div>
+                                    <h2 class="card-title h4"><?php echo $post_array[2]['title']; ?></h2>
+                                    <p class="card-text text-truncate"><?php echo $post_array[2]['content'] ?></p>
+                                    <a class="btn btn-primary" href="post.php ? id=<?php echo $post_array[2]['post_id']?>">Read More</a>
                                 </div>
                             </div>
                             <!-- Blog post-->
                             <div class="card mb-4">
                                 <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">January 1, 2021</div>
-                                    <h2 class="card-title h4">Post Title</h2>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                                    <a class="btn btn-primary" href="#!">Read more →</a>
+                                    <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[3]['created_at']))?></div>
+                                    <h2 class="card-title h4"><?php echo $post_array[3]['title']; ?></h2>
+                                    <p class="card-text text-truncate"><?php echo $post_array[3]['content'] ?></p>
+                                    <a class="btn btn-primary" href="post.php ? id=<?php echo $post_array[3]['post_id']?>">Read More</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Pagination-->
-                    <nav aria-label="Pagination">
-                        <hr class="my-0" />
-                        <ul class="pagination justify-content-center my-4">
-                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                            <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-                        </ul>
-                    </nav>
+               
+                <!-- Pagination -->
+                <nav aria-label="Page navigation example mt-5">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
+                            <a class="page-link"
+                                href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
+                        </li>
+
+                        <?php for($i = 1; $i <= $number_of_pages; $i++ ): ?>
+                        <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
+                            <a class="page-link" href="home.php?page=<?= $i; ?>"> <?= $i; ?> </a>
+                        </li>
+                        <?php endfor; ?>
+
+                    <li class="page-item <?php if($page >= $number_of_pages) { echo 'disabled'; } ?>">
+                        <a class="page-link"
+                            href="<?php if($page >= $number_of_pages){ echo '#'; } else {echo "?page=". $next; } ?>">Next</a>
+                    </li>
+                    </ul>
+                </nav>
                 </div>
                 <!-- Side widgets-->
                 <div class="col-lg-4">
