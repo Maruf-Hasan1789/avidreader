@@ -9,11 +9,6 @@ session_start();
 
 
 <?php
-$results_per_page=4;
-$sql="SELECT * FROM blogposts";
-$result= mysqli_query($conn,$sql);
-$number_of_results= mysqli_num_rows($result);
-$number_of_pages=ceil($number_of_results/$results_per_page);
 
 if(!isset($_GET['page']))
 {
@@ -24,19 +19,56 @@ else
     $page = $_GET['page'];
 }
 
+
+$results_per_page=4;
+if($page!=1)
+{
+    $results_per_page=8;
+}
+$sql="SELECT * FROM blogposts";
+$result= mysqli_query($conn,$sql);
+$number_of_results= mysqli_num_rows($result);
+$number_of_pages=ceil($number_of_results/$results_per_page);
+
+
+
 $starting_limit_number=($page-1)*($results_per_page);
-$sql = "SELECT * FROM blogposts ORDER BY post_id DESC LIMIT ".$starting_limit_number.','.$results_per_page;
+if(isset($_GET['search']))
+{
+    $keyword=$_GET['search'];
+    $sql = "SELECT * FROM blogposts where title LIKE '%keyboard%' ORDER BY post_id DESC LIMIT ".$starting_limit_number.','.$results_per_page;
+}
+else
+{
+    $sql = "SELECT * FROM blogposts ORDER BY post_id DESC LIMIT ".$starting_limit_number.','.$results_per_page;
+}
 $result=mysqli_query($conn,$sql);
 $post_array=array();
 $prev=$page-1;
 $next=$page+1;
 
+
+
 while($row= mysqli_fetch_assoc($result))
 {
     $post_array[] = $row;
-   // echo $row['title']." ".'<br>';
+//    echo $row['title']." ".'<br>';
 }
 
+
+$len=count($post_array);
+if($len==0)
+{
+    header("Location: home.php");
+}
+if($len!=$results_per_page)
+{
+    $rem=$results_per_page-$len;
+    for($i=0;$i<$rem;$i++)
+    {
+        $post_array[] = $post_array[0];
+    }
+}
 
 ?>
 
@@ -58,11 +90,11 @@ while($row= mysqli_fetch_assoc($result))
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="#!">Avidreader</a>
+                <a class="navbar-brand" href="home.php">Avidreader</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
@@ -86,20 +118,19 @@ while($row= mysqli_fetch_assoc($result))
                 <!-- Blog entries-->
                 <div class="col-lg-8">
                     <!-- Featured blog post-->
-                    <div class="card mb-4">
-                    <?php 
+                    <?php
                         $records=mysqli_query($conn,"select * from blogposts where post_id=3 limit 1");
                         $POST = mysqli_fetch_assoc($records);
-                        ?>
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                        <div class="card-body">
-                            <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($POST['created_at']))?> </div>
-                            <h2 class="card-title"><?php echo $POST['title']?></h2>
-                            <p class="card-text text-truncate"><?php echo $POST['content'] ?></p>
-                            <a class="btn btn-primary" href="post.php ? id=<?php echo $POST['post_id']?>">Read More</a>
-                            
-                        </div>
-                    </div>
+                        if($page==1)
+                        {
+                            include_once("featuredPost.php");
+                        }
+                        else
+                        {
+                            include_once("otherpage.php");
+                        }
+                    ?>
+                    
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
                         <?php
@@ -180,8 +211,10 @@ while($row= mysqli_fetch_assoc($result))
                         <div class="card-header">Search</div>
                         <div class="card-body">
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                            <form action="searchpost.php" class="d-flex">
+                                <input class="form-control me-2" name="search" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
                             </div>
                         </div>
                     </div>

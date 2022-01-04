@@ -40,3 +40,15 @@ function random_number($length)
     return $text;
 
 }
+
+function getImagesByPost($conn,$post_id)
+{
+    $query = "select * from images where post_id=$post_id";
+    $run=mysqli_query($conn,$query);
+    $data= array();
+    while($d=mysqli_fetch_assoc($run))
+    {
+        $data[]=$d;
+    }
+    return $data;
+}

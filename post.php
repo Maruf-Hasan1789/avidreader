@@ -17,7 +17,7 @@ session_start();
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Blog Post - Avid Reader</title>
+        <title>Avid Reader</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -47,8 +47,21 @@ session_start();
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
                             <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
                         </header>
+                        <?php
+                            $post_images=getImagesByPost($conn,$post['post_id']);
+                            
+                            
+                            
+                        ?>
                         <!-- Preview image figure-->
-                        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
+                        <?php
+                        foreach ($post_images as $images)
+                        {
+                        ?>
+                        <figure class="mb-4"><img class="img-fluid rounded" src="images/<?=$images['image_id']?>.jpg" alt="..." /></figure>
+                        <?php
+                        }
+                        ?>
                         <!-- Post content-->
                         <section class="mb-5">
                             <p class="fs-5 mb-4"><?php echo $post['content']?></p>
