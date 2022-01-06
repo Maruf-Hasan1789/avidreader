@@ -43,6 +43,7 @@ function random_number($length)
 
 function getImagesByPost($conn,$post_id)
 {
+    
     $query = "select * from images where post_id=$post_id";
     $run=mysqli_query($conn,$query);
     $data= array();
@@ -51,4 +52,19 @@ function getImagesByPost($conn,$post_id)
         $data[]=$d;
     }
     return $data;
+}
+
+function check_return($flag,$post_id_image,$images_id,$conn)
+{
+    if($flag)
+    {
+        return $images_id[$post_id_image];
+    }
+    else
+    {
+        $post_id_temp='0';
+        $post_image_temp=getImagesByPost($conn,$post_id_temp);
+        $x=$post_image_temp[0]['image_id'];
+        return $x;
+    }
 }

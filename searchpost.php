@@ -21,11 +21,6 @@ else
 
 
 $results_per_page=4;
-if($page!=1)
-{
-    $results_per_page=8;
-    
-}
 $sql="SELECT * FROM blogposts";
 $result= mysqli_query($conn,$sql);
 $number_of_results= mysqli_num_rows($result);
@@ -42,6 +37,15 @@ $number_of_pages=ceil($number_of_results/$results_per_page);
 $starting_limit_number=($page-1)*($results_per_page);
 $prev=$page-1;
 $next=$page+1;
+
+
+
+
+
+
+
+
+
 
 ?>
 
@@ -91,10 +95,16 @@ $next=$page+1;
             <div class="row">
                 <!-- Blog entries-->
                     <?php
-                    
+                    $i=0;
                     while($row= mysqli_fetch_assoc($result))
                     {
+                        
                         $post_array[] = $row;
+
+
+                        
+
+
                         
                       ?>
 
@@ -102,10 +112,21 @@ $next=$page+1;
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
                         <div class="col-lg-6">
-                            
+                        <?php
+                                    $flg=false;
+                                    $post_id_for_image=$row['post_id'];
+                                    
+                                    $images= getImagesByPost($conn,$post_id_for_image);
+                                 //   echo $row['post_id'];
+                                 //   echo gettype($images);
+                                   // echo gettype(check_return($flg,$post_id_for_image,$images_id,$conn));
+                                //    echo $images_id[$post_id_for_image].'<br>';
+                                  //  echo gettype($images_id[$post_id_for_image]);
+                                ?>
+
                             <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <a href="#!"><img class="card-img-top" src="images/<?=$images[0]['image_id']?>.jpg"alt="..."/></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($row['created_at']))?></div>
                                     <h2 class="card-title h4"><?php echo $row['title']; ?></h2>
@@ -117,6 +138,7 @@ $next=$page+1;
                     </div>
              
                      <?php 
+                     $i+=1;
                 }
                ?>
                 <!-- Pagination -->

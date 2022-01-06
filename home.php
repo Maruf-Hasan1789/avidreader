@@ -20,11 +20,8 @@ else
 }
 
 
+
 $results_per_page=4;
-if($page!=1)
-{
-    $results_per_page=8;
-}
 $sql="SELECT * FROM blogposts";
 $result= mysqli_query($conn,$sql);
 $number_of_results= mysqli_num_rows($result);
@@ -69,6 +66,40 @@ if($len!=$results_per_page)
         $post_array[] = $post_array[0];
     }
 }
+$postimages=[];
+$post_id_arr[]=array();
+
+for($i=0;$i<$results_per_page;$i++)
+{
+   $post_id_arr =($post_array[$i]['post_id']);
+}
+
+$postimages_arr[]=array();
+
+for($i=0;$i<$results_per_page;$i++)
+{
+    //print_r(getImagesByPost($conn,$post_array[$i]['post_id'])).'<br>';
+    $postimages_arr[]= getImagesByPost($conn,$post_array[$i]['post_id']);
+    //echo $post_array[$i]['post_id'];
+}
+
+$images_id=[];
+
+foreach ($postimages_arr as $images)
+{
+  //  echo gettype($images);
+    
+   
+    foreach ($images as $image)
+    {
+       // $images_id+=[$image['post_id'] >= $image['image_id']];
+        $images_id[$image['post_id']]=$image['image_id'];
+        //echo gettype($image['post_id']);
+        //echo $image['post_id'].'<br>'.$image['image_id'].'<br>'.'<br>';
+      //  echo ($image['post_id']);
+    }
+}
+
 
 ?>
 
@@ -117,20 +148,6 @@ if($len!=$results_per_page)
             <div class="row">
                 <!-- Blog entries-->
                 <div class="col-lg-8">
-                    <!-- Featured blog post-->
-                    <?php
-                        $records=mysqli_query($conn,"select * from blogposts where post_id=3 limit 1");
-                        $POST = mysqli_fetch_assoc($records);
-                        if($page==1)
-                        {
-                            include_once("featuredPost.php");
-                        }
-                        else
-                        {
-                            include_once("otherpage.php");
-                        }
-                    ?>
-                    
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
                         <?php
@@ -140,7 +157,21 @@ if($len!=$results_per_page)
                         <div class="col-lg-6">
                             <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <?php
+                                    $flg=false;
+                                    $post_id_for_image=$post_array[0]['post_id'];
+                                    if(isset($images_id[$post_id_for_image]))
+                                    {
+                                        $flg=true;
+                                        //echo $post_id_for_image;
+                                    }
+                                    $image_temp=(check_return($flg,$post_id_for_image,$images_id,$conn));
+                                    echo $image_temp;
+                                   // echo gettype(check_return($flg,$post_id_for_image,$images_id,$conn));
+                                //    echo $images_id[$post_id_for_image].'<br>';
+                                  //  echo gettype($images_id[$post_id_for_image]);
+                                ?>
+                                <a href="#!"><img class="card-img-top" src="images/<?=$image_temp?>.jpg" alt="..." /></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[0]['created_at']))?></div>
                                     <h2 class="card-title h4"><?php echo $post_array[0]['title']; ?></h2>
@@ -149,8 +180,27 @@ if($len!=$results_per_page)
                                 </div>
                             </div>
                             <!-- Blog post-->
+                            
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+
+                            <?php
+                                    $flg=false;
+                                    $post_id_for_image=$post_array[1]['post_id'];
+                                    if(isset($images_id[$post_id_for_image]))
+                                    {
+                                        $flg=true;
+                                        //echo $post_id_for_image;
+                                    }
+                                    $image_temp=(check_return($flg,$post_id_for_image,$images_id,$conn));
+                                   // echo $image_temp;
+                                   // echo gettype(check_return($flg,$post_id_for_image,$images_id,$conn));
+                                //    echo $images_id[$post_id_for_image].'<br>';
+                                  //  echo gettype($images_id[$post_id_for_image]);
+                                ?>
+
+
+
+                                <a href="#!"><img class="card-img-top" src="images/<?=$image_temp?>.jpg"alt="..."/></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[1]['created_at']))?></div>
                                     <h2 class="card-title h4"><?php echo $post_array[1]['title']; ?></h2>
@@ -161,8 +211,42 @@ if($len!=$results_per_page)
                         </div>
                         <div class="col-lg-6">
                             <!-- Blog post-->
+
+                            <?php
+                                    $flg=false;
+                                    $post_id_for_image=$post_array[2]['post_id'];
+                                    if(isset($images_id[$post_id_for_image]))
+                                    {
+                                        $flg=true;
+                                        //echo $post_id_for_image;
+                                    }
+                                    $image_temp=(check_return($flg,$post_id_for_image,$images_id,$conn));
+                                    
+                                   // echo gettype(check_return($flg,$post_id_for_image,$images_id,$conn));
+                                //    echo $images_id[$post_id_for_image].'<br>';
+                                  //  echo gettype($images_id[$post_id_for_image]);
+                                ?>
+
+
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                            <?php
+                                    $flg=false;
+                                    $post_id_for_image=$post_array[2]['post_id'];
+                                    if(isset($images_id[$post_id_for_image]))
+                                    {
+                                        $flg=true;
+                                        //echo $post_id_for_image;
+                                    }
+                                    $image_temp=(check_return($flg,$post_id_for_image,$images_id,$conn));
+                                    
+                                   // echo gettype(check_return($flg,$post_id_for_image,$images_id,$conn));
+                                //    echo $images_id[$post_id_for_image].'<br>';
+                                  //  echo gettype($images_id[$post_id_for_image]);
+                                ?>
+
+
+
+                                 <a href="#!"><img class="card-img-top" src="images/<?=$image_temp?>.jpg"alt="..."/></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[2]['created_at']))?></div>
                                     <h2 class="card-title h4"><?php echo $post_array[2]['title']; ?></h2>
@@ -172,7 +256,7 @@ if($len!=$results_per_page)
                             </div>
                             <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                                <a href="#!"><img class="card-img-top" src="images/<?=$image_temp?>.jpg"alt="..."/></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[3]['created_at']))?></div>
                                     <h2 class="card-title h4"><?php echo $post_array[3]['title']; ?></h2>
