@@ -44,8 +44,8 @@ session_start();
                             <!-- Post meta content-->
                             <div class="text-muted fst-italic mb-2">Posted on <?php echo date('F jS,Y',strtotime($post['created_at']))?> </div>
                             <!-- Post categories-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="posts_by_category.php?category=<?=$post['Category']?>"><?php echo $post['Category'] ?></a>
+                           
                         </header>
                         <?php
                             $post_images=getImagesByPost($conn,$post['post_id']);

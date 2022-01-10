@@ -18,16 +18,30 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">Web Design</a></li>
-                                        <li><a href="#!">HTML</a></li>
-                                        <li><a href="#!">Freebies</a></li>
+                                    <li><a href="posts_by_category.php?category=Art">Art</a></li>
+                                        <li><a href="posts_by_category.php?category=Biography">Biography</a></li>
+                                      
+                                        <li><a href="posts_by_category.php?category=Classics">Classics</a></li>
+                                       
+                                        <li><a href="posts_by_category.php?category=Fantasy">Fantasy</a></li>
+                                        <li><a href="posts_by_category.php?category=History">History</a></li>
+                                 
+                                        <li><a href="posts_by_category.php?category=Mystery">Mystery</a></li>
+                                        <li><a href="posts_by_category.php?category=Poetry">Poetry</a></li>
                                     </ul>
                                 </div>
                                 <div class="col-sm-6">
                                     <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">JavaScript</a></li>
-                                        <li><a href="#!">CSS</a></li>
-                                        <li><a href="#!">Tutorials</a></li>
+                                    <li><a href="posts_by_category.php?category=Psychology">Psychology</a></li>
+                                        <li><a href="posts_by_category.php?category=Romance">Romance</a></li>
+                                        <li><a href="posts_by_category.php?category=Science">Science</a></li>
+                                        <li><a href="posts_by_category.php?category=Science Fiction">Science Fiction</a></li>
+                                   
+                                       
+                                        <li><a href="posts_by_category.php?category=Thriller">Thriller</a></li>
+                                        
+                                        <li><a href="posts_by_category.php?category=Religion">Religion</a></li>
+                                        <li><a href="posts_by_category.php?category=Crime">Crime</a></li>
                                     </ul>
                                 </div>
                             </div>
