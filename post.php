@@ -57,8 +57,14 @@ session_start();
                         <?php
                         foreach ($post_images as $images)
                         {
+                            
+                            //echo $images['images'];
+                        
+                        
+                            //echo "asdfsa";
+                            echo $images['image_id']."<br>";
                         ?>
-                        <figure class="mb-4"><img class="img-fluid rounded" src="images/<?=$images['image_id']?>.jpg" alt="..." /></figure>
+                        <figure class="mb-4"><img class="img-fluid rounded" src="images/<?=$images['images']?>" alt="..." /></figure>
                         <?php
                         }
                         ?>

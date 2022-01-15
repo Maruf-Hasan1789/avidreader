@@ -119,14 +119,16 @@ $next=$page+1;
                                     $images= getImagesByPost($conn,$post_id_for_image);
                                  //   echo $row['post_id'];
                                  //   echo gettype($images);
+                                   /// print_r($images);
                                    // echo gettype(check_return($flg,$post_id_for_image,$images_id,$conn));
                                 //    echo $images_id[$post_id_for_image].'<br>';
                                   //  echo gettype($images_id[$post_id_for_image]);
+                                  //  print_r($images);
                                 ?>
 
                             <!-- Blog post-->
                             <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top" src="images/<?=$images[0]['image_id']?>.jpg"alt="..."/></a>
+                            <a href="#!"><img class="card-img-top" src="images/<?=$images[0]['images']?>" alt="..."></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($row['created_at']))?></div>
                                     <h2 class="card-title h4"><?php echo $row['title']; ?></h2>

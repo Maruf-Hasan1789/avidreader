@@ -58,13 +58,16 @@ function check_return($flag,$post_id_image,$images_id,$conn)
 {
     if($flag)
     {
+        //print_r($post_id_image);
+       // echo "<br>";
         return $images_id[$post_id_image];
     }
     else
     {
         $post_id_temp='0';
         $post_image_temp=getImagesByPost($conn,$post_id_temp);
-        $x=$post_image_temp[0]['image_id'];
+        $x=$post_image_temp[0]['images'];
+        //print_r($post_image_temp);
         return $x;
     }
 }

@@ -93,12 +93,21 @@ foreach ($postimages_arr as $images)
     foreach ($images as $image)
     {
        // $images_id+=[$image['post_id'] >= $image['image_id']];
-        $images_id[$image['post_id']]=$image['image_id'];
+        $images_id[$image['post_id']]=$image['images'];
         //echo gettype($image['post_id']);
         //echo $image['post_id'].'<br>'.$image['image_id'].'<br>'.'<br>';
       //  echo ($image['post_id']);
+        
     }
 }
+//print_r($images_id);
+
+$all_images=[];
+foreach ($images_id as $img)
+{
+    $all_images[]=$img;
+}
+//print_r($all_images);
 
 
 ?>
@@ -165,13 +174,15 @@ foreach ($postimages_arr as $images)
                                         $flg=true;
                                         //echo $post_id_for_image;
                                     }
+                                //    echo $post_id_for_image;
                                     $image_temp=(check_return($flg,$post_id_for_image,$images_id,$conn));
-                                 //   echo $image_temp;
+
+                                    //echo $image_temp;
                                    // echo gettype(check_return($flg,$post_id_for_image,$images_id,$conn));
                                 //    echo $images_id[$post_id_for_image].'<br>';
                                   //  echo gettype($images_id[$post_id_for_image]);
                                 ?>
-                                <a href="#!"><img class="card-img-top" src="images/<?=$image_temp?>.jpg" alt="..." /></a>
+                                <a href="#!"><img class="card-img-top" src="images/<?=$all_images[0]?>" alt="..." /></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[0]['created_at']))?></div>
                                     <h2 class="card-title h4"><?php echo $post_array[0]['title']; ?></h2>
@@ -201,7 +212,7 @@ foreach ($postimages_arr as $images)
 
 
 
-                                <a href="#!"><img class="card-img-top" src="images/<?=$image_temp?>.jpg"alt="..."/></a>
+                                <a href="#!"><img class="card-img-top" src="images/<?=$all_images[1]?>"alt="..."/></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[1]['created_at']))?></div>
                                     <h2 class="card-title h4"><?php echo $post_array[1]['title']; ?></h2>
@@ -247,7 +258,7 @@ foreach ($postimages_arr as $images)
 
 
 
-                                 <a href="#!"><img class="card-img-top" src="images/<?=$image_temp?>.jpg"alt="..."/></a>
+                                 <a href="#!"><img class="card-img-top" src="images/<?=$all_images[2]?>"alt="..."/></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[2]['created_at']))?></div>
                                     <h2 class="card-title h4"><?php echo $post_array[2]['title']; ?></h2>
@@ -257,7 +268,7 @@ foreach ($postimages_arr as $images)
                             </div>
                             <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="images/<?=$image_temp?>.jpg"alt="..."/></a>
+                                <a href="#!"><img class="card-img-top" src="images/<?=$all_images[3]?>"alt="..."/></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[3]['created_at']))?></div>
                                     <h2 class="card-title h4"><?php echo $post_array[3]['title']; ?></h2>
