@@ -6,13 +6,13 @@ session_start();
     include("connect_database.php");
     include("functions.php");
     
-
+   
     if($_SERVER['REQUEST_METHOD'] == "POST")
     {
         //something was posted
         $user_name= $_POST['username'];
         $password = $_POST['password'];
-        echo $user_name;
+        
         if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
         {
             
@@ -27,6 +27,22 @@ session_start();
                        
                        if($user_data['password']==$password)
                        {
+                        if(!empty($_POST["remember"]))   
+                        {  
+                          setcookie ("member_login",$user_name,time()+ (10 * 365 * 24 * 60 * 60));  
+                          setcookie ("member_password",$password,time()+ (10 * 365 * 24 * 60 * 60));
+                        }
+                        else  
+                        {  
+                         if(isset($_COOKIE["member_login"]))   
+                         {  
+                          setcookie ("member_login","");  
+                         }  
+                         if(isset($_COOKIE["member_password"]))   
+                         {  
+                          setcookie ("member_password","");
+                         }  
+                        }  
                             $_SESSION['user_id']=$user_data['user_id'];
                             if($user_name=='admin')
                             {
@@ -39,14 +55,14 @@ session_start();
                               die;
                        }
                 }
-                echo "wrong username or password";
+                $message="wrong username or password";
             }
            
 
         }
         else
         {
-            echo "Please enter valid information";
+            $message="Please enter valid information";
 
         }
     }
@@ -79,7 +95,7 @@ session_start();
       
     
       <div class="d-md-flex half">
-        <div class="bg" style="background-image: url('images/bg_1.jpg');"></div>
+        <div class="bg" style="background-image: url('https://i.pinimg.com/736x/d0/91/a4/d091a4f02b7e64d126f2985fa8bdd34b.jpg');"></div>
         <div class="contents">
     
           <div class="container">
@@ -93,13 +109,17 @@ session_start();
                   <form action="#" method="POST">
                     <div class="form-group first">
                       <label for="username">Username</label>
-                      <input type="text" class="form-control" placeholder="your-email@gmail.com" name="username">
+                      <input type="text" class="form-control" placeholder="your-email@gmail.com" name="username" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>">
                     </div>
                     <div class="form-group last mb-3">
                       <label for="password">Password</label>
-                      <input type="password" class="form-control" placeholder="Your Password" name="password">
+                      <input type="password" class="form-control" placeholder="Your Password" name="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>">
                     </div>
-            
+                    <div class="form-group">
+                      <input type="checkbox" name="remember" ?>
+                      <label for="remember-me">Remember me</label>
+                    </div>
+                    <div class="text-danger"><?php if(isset($message)) { echo $message; } ?></div>  
                     <input type="submit" value="logIn" class="btn btn-block btn-primary">
     
                   </form>

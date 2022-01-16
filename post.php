@@ -62,7 +62,7 @@ session_start();
                         
                         
                             //echo "asdfsa";
-                            echo $images['image_id']."<br>";
+                           // echo $images['image_id']."<br>";
                         ?>
                         <figure class="mb-4"><img class="img-fluid rounded" src="images/<?=$images['images']?>" alt="..." /></figure>
                         <?php
@@ -75,7 +75,7 @@ session_start();
                     </article>
                     <!-- Comments section-->
                     <section class="mb-5">
-                        <div class="card bg-light">
+                        <div class="card bg-light" style="display:none">
                             <div class="card-body">
                                 <!-- Comment form-->
                                 <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>

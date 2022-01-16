@@ -56,7 +56,7 @@ session_start();
       
     
       <div class="d-md-flex half">
-        <div class="bg" style="background-image: url('images/bg_1.jpg');"></div>
+        <div class="bg" style="background-image: url('https://i.pinimg.com/736x/d0/91/a4/d091a4f02b7e64d126f2985fa8bdd34b.jpg');"></div>
         <div class="contents">
     
           <div class="container">

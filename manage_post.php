@@ -4,6 +4,11 @@ $_SESSION;
      include("connect_database.php");
      include("functions.php");
      $user_data=check_login($conn);
+     if($user_data['user_name']!='admin')
+     {
+        header("Location:home.php");
+        die;  
+     }
      if($_SERVER['REQUEST_METHOD'] == "POST")
      {
           $old_title=$_POST['old_title'];
@@ -36,7 +41,7 @@ $_SESSION;
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS</title>
+<title>Admin Panel for post modification</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
@@ -45,6 +50,7 @@ $_SESSION;
   <a href="post_creation_admin.php" class="w3-bar-item w3-button">Create Post</button>
   <a href="manage_post.php" class="w3-bar-item w3-button">Manage Post</a>
   <a href="manage_user.php" class="w3-bar-item w3-button">Manage User</a>
+  <a href="logout.php" class="w3-bar-item w3-button">Logout</a>
     
 </div>
 <div style="margin-left:25%">

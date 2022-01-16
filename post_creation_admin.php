@@ -4,6 +4,11 @@ session_start();
      include("connect_database.php");
      include("functions.php");
      $user_data=check_login($conn);
+     if($user_data['user_name']!='admin')
+     {
+        header("Location:home.php");
+        die;  
+     }
 ?>
 
 
@@ -15,22 +20,29 @@ session_start();
         $category=$_POST['category'];
         $image_name=$_FILES['image']['name'];
         $tmp_name=$_FILES['image']['tmp_name'];
+        echo strlen($content);
         if(empty($title) || empty($content) || empty($category) || empty($image_name))
         {
-            die;
+            
+            headder(Location: "post_creation_admin.php");
+           die;  
         }
+       
         $folder="images/".$image_name;
         move_uploaded_file($tmp_name,$folder);
        // print_r($_FILES['image']);
-
-       $in_query="insert into blogposts (title,content,Category) values ('$title','$content','$category')";
-       if(mysqli_query($conn,$in_query))
-       {
-       //  echo "insertion done";
-       }
-   
+       // echo $content;
+       $in_query="INSERT INTO blogposts (title, content,Category) VALUES ('$title','$content','$category')";
+       mysqli_query($conn,$in_query);
+    //   {
+       //  header("Location:post_creation_admin.php");
+      //   die;
+      // }
+       //echo "fasf";
        $squery="select * from blogposts where title LIKE '%$title%'";
        $records=mysqli_query($conn,$squery);
+     //  print_r($records);
+
        $uploaded_post= mysqli_fetch_assoc($records);
       // print_r($uploaded_post);
        $uploaded_id=$uploaded_post['post_id'];
@@ -51,7 +63,7 @@ session_start();
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS</title>
+<title>Admin Panel for post creation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
@@ -60,6 +72,7 @@ session_start();
   <a href="post_creation_admin.php" class="w3-bar-item w3-button">Create Post</button>
   <a href="manage_post.php" class="w3-bar-item w3-button">Manage Post</a>
   <a href="manage_user.php" class="w3-bar-item w3-button">Manage User</a>
+  <a href="logout.php" class="w3-bar-item w3-button">Logout</a>
 </div>
 
 
@@ -104,7 +117,7 @@ Title: <input type="text" name="title">
     </select>
     
 </br>
-Content: <textarea name="content" rows="3" cols="30"></textarea>
+Content: <textarea name="content"></textarea>
     Image :<input type="file" id="image" name="image">
     <br>
     <div>
