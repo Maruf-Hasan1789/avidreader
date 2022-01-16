@@ -58,6 +58,20 @@ if($len==0)
 {
     header("Location: home.php");
 }
+
+
+//echo $len;
+$div_arr=[];
+
+for($i=0;$i<$results_per_page;$i++)
+{
+    if($i<$len)
+        $div_arr[]='block';
+    else
+        $div_arr[]='none';
+    //echo $div_arr[$i];
+
+}
 if($len!=$results_per_page)
 {
     $rem=$results_per_page-$len;
@@ -165,7 +179,7 @@ foreach ($images_id as $img)
                         ?>
                         <div class="col-lg-6">
                             <!-- Blog post-->
-                            <div class="card mb-4">
+                            <div class="card mb-4" style="display:<?'$div_arr[0]'?>" >
                                 <?php
                                     $flg=false;
                                     $post_id_for_image=$post_array[0]['post_id'];
@@ -193,7 +207,7 @@ foreach ($images_id as $img)
                             </div>
                             <!-- Blog post-->
                             
-                            <div class="card mb-4">
+                            <div class="card mb-4" style="display:<?=$div_arr[1]?>">
 
                             <?php
                                     $flg=false;
@@ -240,7 +254,7 @@ foreach ($images_id as $img)
                                 ?>
 
 
-                            <div class="card mb-4">
+                            <div class="card mb-4" style="display:<?=$div_arr[2]?>" >
                             <?php
                                     $flg=false;
                                     $post_id_for_image=$post_array[2]['post_id'];
@@ -267,7 +281,7 @@ foreach ($images_id as $img)
                                 </div>
                             </div>
                             <!-- Blog post-->
-                            <div class="card mb-4">
+                            <div class="card mb-4" style="display:<?=$div_arr[3]?>" >
                                 <a href="#!"><img class="card-img-top" src="images/<?=$all_images[3]?>"alt="..."/></a>
                                 <div class="card-body">
                                     <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[3]['created_at']))?></div>
