@@ -32,9 +32,25 @@ session_start();
 ?>
 
 
+
+
 <!DOCTYPE html>
     <html lang="en">
       <head>
+      <script>
+
+    function Validation() {
+    var user = document.getElementById("username").value;
+    var pass = document.getElementById("password").value;
+
+    if (user == "" || pass.length<4) {
+        alert("Email or Password cannot be empty");
+        return false;
+    }
+    return true;
+}
+
+</script>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -70,17 +86,17 @@ session_start();
                   <form action="#" method="POST">
                     <div class="form-group first">
                       <label for="username">Username</label>
-                      <input type="text" class="form-control" placeholder="your-email@gmail.com" name="username">
+                      <input type="text" class="form-control" placeholder="your-email@gmail.com" id="username" name="username">
                     </div>
                     <div class="form-group last mb-3">
                       <label for="password">Password</label>
-                      <input type="password" class="form-control" placeholder="Your Password" name="password">
+                      <input type="password" class="form-control" placeholder="Your Password" id="password" name="password">
                     </div>
             
-                    <input type="submit" value="SignUp" class="btn btn-block btn-primary">
+                    <input type="submit" value="SignUp" class="btn btn-block btn-primary" onclick="Validation()">
     
                   </form>
-                  <p class="text-center">Already a member?<a data-toggle="tab" href="login.php">Log in</a></p>
+                  <p class="text-center">Already a member?<a href="login.php">Log in</a></p>
                 </div>
               </div>
             </div>

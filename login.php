@@ -123,7 +123,7 @@ session_start();
                     <input type="submit" value="logIn" class="btn btn-block btn-primary">
     
                   </form>
-                  <p class="text-center">Not a member? <a data-toggle="tab" href="signup.php">Sign Up</a></p>
+                  <p class="text-center">Not a member? <a href="signup.php">Sign Up</a></p>
                 </div>
               </div>
             </div>

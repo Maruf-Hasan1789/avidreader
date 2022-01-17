@@ -38,6 +38,15 @@ $_SESSION;
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
 
+<style>
+  table,th,td
+  {
+    border: 2px solid black;
+    width: 100%;
+    
+  }
+  </style>
+
 <div class="w3-sidebar w3-bar-block w3-black" style="width:25%">
   <a href="post_creation_admin.php" class="w3-bar-item w3-button">Create Post</button>
   <a href="manage_post.php" class="w3-bar-item w3-button">Manage Post</a>
@@ -58,6 +67,32 @@ $_SESSION;
                     <input type="submit" value="delete user" id="delete_btn"class="btn btn-block btn-primary" style="margin-left:10%"><br>
                   </form>
 </div>
+<div>
+     <table>
+       <tr>
+         <th>UserName</th>
+         <th>Date of Account Creation</th>
+         <th>User_Id</th>
+    </tr>
+  
+      <?php
+        $query="select * from users";
+        $result=mysqli_query($conn,$query);
+        while($d=mysqli_fetch_assoc($result))
+        {
+        //  //echo ($row['user_name']);
+        //  echo "<br>";
+      ?>
+      <tr>
+      <td><?=$d['user_name'];?></td>
+      <td><?=$d['date'];?></td>
+      <td><?=$d['user_id'];?></td>
+      <?php
+        }
+      ?>
+      <tr>
+    </table>
+    </div>
 
 </div>
 </body>

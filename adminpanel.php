@@ -42,8 +42,9 @@ $_SESSION;
         $number_of_results= mysqli_num_rows($result);
         echo "Total number of posts: ".$number_of_results."<br><br>";
         $sql="SELECT * FROM users";
-        $result= mysqli_query($conn,$sql);
-        echo "Total number of users: ".$number_of_results."<br><br>";
+        $query= mysqli_query($conn,$sql);
+        $tot=mysqli_num_rows($query);
+        echo "Total number of users: ".$tot."<br><br>";
 ?></p>
 </div>
 </div>
