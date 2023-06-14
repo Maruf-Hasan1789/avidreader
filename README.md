@@ -6,5 +6,5 @@ The project was implemented using PHP,HTML and MYSQL is used as the database.
 
 <img src="ProjectDemoImages\Screenshot (25).png" height=300>
 <img src="ProjectDemoImages\Screenshot (26).png" height=300>
-<img src="ProjectDemoImages\Screenshot (27).png" height=300>
-<img src="ProjectDemoImages\Screenshot (28).png" height=300>
+<img src="ProjectDemoImages\Screenshot (31).png" height=300>
+<img src="ProjectDemoImages\Screenshot (33).png" height=300>

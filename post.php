@@ -64,7 +64,7 @@ session_start();
                             //echo "asdfsa";
                            // echo $images['image_id']."<br>";
                         ?>
-                        <figure class="mb-4"><img class="img-fluid rounded" width=300 src="images/<?=$images['images']?>" alt="..." /></figure>
+                        <figure class="mb-4"><img class="img-fluid rounded" height=200 src="images/<?=$images['images']?>" alt="..." /></figure>
                         <?php
                         }
                         ?>
