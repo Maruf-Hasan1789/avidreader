@@ -50,7 +50,7 @@ session_start();
                             }
                             else
                             {
-                              header("Location: home.php");
+                              header("Location: index.php");
                             }
                               die;
                        }

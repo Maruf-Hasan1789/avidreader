@@ -42,7 +42,7 @@ session_start();
                             <!-- Post title-->
                             <h1 class="fw-bolder mb-1"><?php echo $post['title']?></h1>
                             <!-- Post meta content-->
-                            <div class="text-muted fst-italic mb-2">Posted on <?php echo date('F jS,Y',strtotime($post['created_at']))?> </div>
+                           <!-- <div class="text-muted fst-italic mb-2">Posted on <?php echo date('F jS,Y',strtotime($post['created_at']))?> </div>  -->
                             <!-- Post categories-->
                             <a class="badge bg-secondary text-decoration-none link-light" href="posts_by_category.php?category=<?=$post['Category']?>"><?php echo $post['Category'] ?></a>
                            
@@ -64,7 +64,7 @@ session_start();
                             //echo "asdfsa";
                            // echo $images['image_id']."<br>";
                         ?>
-                        <figure class="mb-4"><img class="img-fluid rounded" src="images/<?=$images['images']?>" alt="..." /></figure>
+                        <figure class="mb-4"><img class="img-fluid rounded" width=300 src="images/<?=$images['images']?>" alt="..." /></figure>
                         <?php
                         }
                         ?>

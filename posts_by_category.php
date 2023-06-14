@@ -75,11 +75,11 @@ $next=$page+1;
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="home.php">Avidreader</a>
+                <a class="navbar-brand" href="index.php">Avidreader</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
@@ -134,9 +134,9 @@ $next=$page+1;
 
                             <!-- Blog post-->
                             <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top" src="images/<?=$images[0]['images']?>"alt="..."/></a>
+                            <a href="#!"><img class="card-img-top" width=400 height=300 src="images/<?=$images[0]['images']?>"alt="..."/></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($row['created_at']))?></div>
+                                        <!-- <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($row['created_at']))?></div>-->
                                     <h2 class="card-title h4"><?php echo $row['title']; ?></h2>
                                     <p class="card-text text-truncate"><?php echo $row['content'] ?></p>
                                     <a class="btn btn-primary" href="post.php ? id=<?php echo $row['post_id']?>">Read More</a>
@@ -159,7 +159,7 @@ $next=$page+1;
 
                         <?php for($i = 1; $i <= $number_of_pages; $i++ ): ?>
                         <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                            <a class="page-link" href="home.php?page=<?= $i; ?>"> <?= $i; ?> </a>
+                            <a class="page-link" href="index.php?page=<?= $i; ?>"> <?= $i; ?> </a>
                         </li>
                         <?php endfor; ?>
 

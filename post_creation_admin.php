@@ -6,7 +6,7 @@ session_start();
      $user_data=check_login($conn);
      if($user_data['user_name']!='admin')
      {
-        header("Location:home.php");
+        header("Location:index.php");
         die;  
      }
 ?>

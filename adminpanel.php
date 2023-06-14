@@ -7,7 +7,7 @@ $_SESSION;
      //print_r($user_data);
      if($user_data['user_name']!='admin')
      {
-        header("Location:home.php");
+        header("Location:index.php");
         die;  
      }
 ?>

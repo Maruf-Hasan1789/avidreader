@@ -46,17 +46,18 @@ $next=$page+1;
 
 
 
+
 while($row= mysqli_fetch_assoc($result))
 {
-    $post_array[] = $row;
-//    echo $row['title']." ".'<br>';
+   $post_array[] = $row;
+   //echo $row['post_id']." ".'<br>';
 }
 
 
 $len=count($post_array);
 if($len==0)
 {
-    header("Location: home.php");
+    header("Location: index.php");
 }
 
 
@@ -80,6 +81,9 @@ if($len!=$results_per_page)
         $post_array[] = $post_array[0];
     }
 }
+
+
+
 $postimages=[];
 $post_id_arr[]=array();
 
@@ -139,16 +143,17 @@ foreach ($images_id as $img)
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/mystyle.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="home.php">Avidreader</a>
+                <a class="navbar-brand" href="index.php">Avidreader</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="home.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
@@ -161,8 +166,8 @@ foreach ($images_id as $img)
         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
                 <div class="text-center my-5">
-                    <h1 class="fw-bolder">Welcome to Avid Reader Blog Home!</h1>
-                    <p class="lead mb-0">Read whenever you can wherever you can</p>
+                    <h1 class="fw-bolder" id="index_header">Welcome to Avid Reader!</h1>
+                    <p class="lead mb-0" id="index_header_below ">Read whenever you can wherever you can</p>
                 </div>
             </div>
         </header>
@@ -196,9 +201,9 @@ foreach ($images_id as $img)
                                 //    echo $images_id[$post_id_for_image].'<br>';
                                   //  echo gettype($images_id[$post_id_for_image]);
                                 ?>
-                                <a href="#!"><img class="card-img-top" src="images/<?=$all_images[0]?>" alt="..." /></a>
+                                <a href="#!"><img class="card-img-top" height=300 src="images/<?=$all_images[0]?>" alt="..." /></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[0]['created_at']))?></div>
+                                    <!-- <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[0]['created_at']))?></div> -->
                                     <h2 class="card-title h4"><?php echo $post_array[0]['title']; ?></h2>
                                     <p class="card-text text-truncate"><?php echo $post_array[0]['content'] ?></p>
                                     <a class="btn btn-primary" href="post.php ? id=<?php echo $post_array[0]['post_id']?>">Read More</a>
@@ -226,9 +231,9 @@ foreach ($images_id as $img)
 
 
 
-                                <a href="#!"><img class="card-img-top" src="images/<?=$all_images[1]?>"alt="..."/></a>
+                                <a href="#!"><img class="card-img-top" height=300 src="images/<?=$all_images[1]?>"alt="..."/></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[1]['created_at']))?></div>
+                                    <!-- <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[1]['created_at']))?></div> -->
                                     <h2 class="card-title h4"><?php echo $post_array[1]['title']; ?></h2>
                                     <p class="card-text text-truncate"><?php echo $post_array[1]['content'] ?></p>
                                     <a class="btn btn-primary" href="post.php ? id=<?php echo $post_array[1]['post_id']?>">Read More</a>
@@ -272,9 +277,9 @@ foreach ($images_id as $img)
 
 
 
-                                 <a href="#!"><img class="card-img-top" src="images/<?=$all_images[2]?>"alt="..."/></a>
+                                 <a href="#!"><img class="card-img-top" height=300 src="images/<?=$all_images[2]?>"alt="..."/></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[2]['created_at']))?></div>
+                                  <!--  <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[2]['created_at']))?></div> -->
                                     <h2 class="card-title h4"><?php echo $post_array[2]['title']; ?></h2>
                                     <p class="card-text text-truncate"><?php echo $post_array[2]['content'] ?></p>
                                     <a class="btn btn-primary" href="post.php ? id=<?php echo $post_array[2]['post_id']?>">Read More</a>
@@ -282,9 +287,9 @@ foreach ($images_id as $img)
                             </div>
                             <!-- Blog post-->
                             <div class="card mb-4" style="display:<?=$div_arr[3]?>" >
-                                <a href="#!"><img class="card-img-top" src="images/<?=$all_images[3]?>"alt="..."/></a>
+                                <a href="#!"><img class="card-img-top" height=300  src="images/<?=$all_images[3]?>"alt="..."/></a>
                                 <div class="card-body">
-                                    <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[3]['created_at']))?></div>
+                                 <!--   <div class="small text-muted">Posted on <?php echo date('F jS,Y',strtotime($post_array[3]['created_at']))?></div> -->
                                     <h2 class="card-title h4"><?php echo $post_array[3]['title']; ?></h2>
                                     <p class="card-text text-truncate"><?php echo $post_array[3]['content'] ?></p>
                                     <a class="btn btn-primary" href="post.php ? id=<?php echo $post_array[3]['post_id']?>">Read More</a>
@@ -303,7 +308,7 @@ foreach ($images_id as $img)
 
                         <?php for($i = 1; $i <= $number_of_pages; $i++ ): ?>
                         <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                            <a class="page-link" href="home.php?page=<?= $i; ?>"> <?= $i; ?> </a>
+                            <a class="page-link" href="index.php?page=<?= $i; ?>"> <?= $i; ?> </a>
                         </li>
                         <?php endfor; ?>
 

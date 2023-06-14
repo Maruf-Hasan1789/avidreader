@@ -6,7 +6,7 @@ $_SESSION;
      $user_data=check_login($conn);
      if($user_data['user_name']!='admin')
      {
-        header("Location:home.php");
+        header("Location:index.php");
         die;  
      }
      if($_SERVER['REQUEST_METHOD'] == "POST")

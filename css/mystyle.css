@@ -1,0 +1,16 @@
+#index_header {
+  text-align: center;
+  color: black;
+  border: 0rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: wheat;
+}
+
+#index_header_below {
+  text-align: center;
+  color: darkblue;
+  border: 2rem;
+  background-color: wheat;
+  font-size: large;
+  visibility: hidden;
+}

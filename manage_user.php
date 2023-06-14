@@ -6,7 +6,7 @@ $_SESSION;
      $user_data=check_login($conn);
      if($user_data['user_name']!='admin')
      {
-        header("Location:home.php");
+        header("Location:index.php");
         die;  
      }
      if($_SERVER['REQUEST_METHOD'] == "POST")
@@ -71,7 +71,7 @@ $_SESSION;
      <table>
        <tr>
          <th>UserName</th>
-         <th>Date of Account Creation</th>
+ 
          <th>User_Id</th>
     </tr>
   
@@ -85,7 +85,7 @@ $_SESSION;
       ?>
       <tr>
       <td><?=$d['user_name'];?></td>
-      <td><?=$d['date'];?></td>
+    
       <td><?=$d['user_id'];?></td>
       <?php
         }
