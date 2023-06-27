@@ -4,7 +4,4 @@ Avidreader is a blog for readers and book recommendations similar to "goodreads.
 
 **Screenshoot** of the project
 
-<img src="ProjectDemoImages\Screenshot (25).png" height=300>
-<img src="ProjectDemoImages\Screenshot (26).png" height=300>
-<img src="ProjectDemoImages\Screenshot (31).png" height=300>
-<img src="ProjectDemoImages\Screenshot (33).png" height=300>
+
