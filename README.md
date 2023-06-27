@@ -1,5 +1,5 @@
 
-# Avidreader
+# avidreader
 
 Avidreader is a blog for book recomendations similar to goodreads.com. Implemented the project as part of my undergraduate WebProject.The project was implemented using PHP,HTML and MYSQL is used as the database.
 
